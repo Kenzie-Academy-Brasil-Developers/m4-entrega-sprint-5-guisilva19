@@ -1,12 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 
-export const validateUserUpdateMiddleware =  async (req: Request, res: Response, next: NextFunction) => {
+export const validateUserUpdateMiddleware = (schema: any) => async (req: Request, res: Response, next: NextFunction) => {
 
-    const {id, isAdm, isActive } = req.body
-
-    if(id || isAdm || isActive){
-        return res.status(401).json({message: "Errorrrrrr"})
-    }
-
-   return next()
+    const data = req.body
+    
+          const validatedData = await schema.validate(data, {
+            abortEarly: false,
+            stripUnknown: true,
+          });
+          const values = Object.values(validatedData);
+          if (!values.length) {
+            return res.status(401).json({ message: "Not update" });
+          }
+          req.userValidated = validatedData;
+          next();
 }

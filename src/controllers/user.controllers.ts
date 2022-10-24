@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
-import { createdUserService, deletedUserService, listUsersService, sessionUserService, updatedUserService } from "../services/user.service"
+import { createdUserService, deletedUserService, listUsersService, sessionUserService, updatedUserService } from "../services/user.services"
 import { instanceToPlain } from "class-transformer"
-import { AppError } from "../errors/AppError"
 
 const createdUserController = async (req: Request, res: Response) => {
     const { email, name, isAdm, password } = req.body
