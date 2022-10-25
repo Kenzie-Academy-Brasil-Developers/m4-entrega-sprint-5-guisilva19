@@ -1,5 +1,4 @@
 import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from 'typeorm'
-import {v4 as uuid} from 'uuid'
 import { Properties } from './properties.entity'
 
 @Entity()
@@ -11,7 +10,7 @@ export class Categories {
     @Column({unique: true})
     name: string
 
-    @OneToMany(() => Properties, categories => categories.category)
+    @OneToMany(() => Properties, categories => categories.category,{ eager: true})
     @JoinColumn()
-    property: Properties[]
+    properties: Properties[]
 }

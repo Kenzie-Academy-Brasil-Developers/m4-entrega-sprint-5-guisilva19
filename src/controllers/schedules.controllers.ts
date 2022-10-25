@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { createSchedulesService } from "../services/schedules.services"
+import { createSchedulesService, listSchedulesFromPropertyService } from "../services/schedules.services"
 
 const createSchedulesController = async (req: Request, res: Response) => {
 
@@ -9,4 +9,9 @@ const createSchedulesController = async (req: Request, res: Response) => {
     return res.status(201).json(newSchedules)
 }
 
-export { createSchedulesController }
+const listSchedulesFromPropertyController = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const schedule = await listSchedulesFromPropertyService(id)
+    return res.json(schedule)
+}
+export { createSchedulesController, listSchedulesFromPropertyController }

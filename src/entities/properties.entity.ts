@@ -10,12 +10,10 @@ export class Properties {
     @PrimaryGeneratedColumn('uuid')
     readonly id: string
 
-    
-    
     @Column({default: false})
     sold: boolean
     
-    @Column({ type: 'decimal', precision: 2, scale: 10})
+    @Column({ type: 'decimal', precision: 10, scale: 2})
     value: number
     
     @Column()
@@ -33,11 +31,10 @@ export class Properties {
     @JoinColumn()
     address: Addresses
     
-    @OneToMany(() => SchedulesUsersProperties, SchedulesUsersProperties => SchedulesUsersProperties.property, {nullable: true})
+    @OneToMany(() => SchedulesUsersProperties, SchedulesUsersProperties => SchedulesUsersProperties.property, {eager: true})
     schedules: SchedulesUsersProperties[]
     
-    @ManyToOne(() => Categories,{nullable: true})
-    @JoinColumn()
+    @ManyToOne(() => Categories)
     category: Categories
 
 

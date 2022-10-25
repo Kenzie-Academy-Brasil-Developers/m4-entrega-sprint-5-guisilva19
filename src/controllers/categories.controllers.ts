@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import {createCategoriesService, listCategoriesService } from "../services/categories.services"
+import {createCategoriesService, listCategoriesService, listPropertiesFromCategoryService } from "../services/categories.services"
 
 
 const createCategoriesController = async (req: Request, res: Response) => {
@@ -14,5 +14,12 @@ const listCategoriesController = async (req: Request, res: Response) => {
     return res.json(categories)
 }
 
+const listPropertiesFromCategoryController = async (req: Request, res: Response) => {
 
-export { createCategoriesController, listCategoriesController }
+    const { id } = req.params
+    const propertiesFromCategory = await listPropertiesFromCategoryService(id)
+    return res.json(propertiesFromCategory)
+
+}
+
+export { createCategoriesController, listCategoriesController, listPropertiesFromCategoryController }

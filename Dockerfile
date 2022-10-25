@@ -1,11 +1,19 @@
-FROM node:16.15.1
+FROM postgres:latest
 
-WORKDIR /app
+ARG POSTGRES_PASSWORD=1234
 
-COPY "package.json" .
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
-RUN yarn
 
-COPY . .
+# FROM node:16.15.1
 
-CMD ["yarn", "dev"]
+# WORKDIR /app
+
+# COPY "package.json" .
+
+# RUN yarn
+
+# COPY . .
+
+# CMD ["yarn", "dev"]
+
